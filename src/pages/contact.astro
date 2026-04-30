@@ -1,0 +1,377 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import { property, agent } from '../data/property';
+import { ADDRESS_MARKER, FRONT_TREES } from '../data/images';
+---
+
+<Layout
+  pageId="contact"
+  title={`Inquire — ${property.shortName}`}
+  description={`Request a private showing of ${property.shortName} in the ${property.neighborhood}.`}
+>
+  <!-- ========== PAGE HEADER ========== -->
+  <header class="contact-header">
+    <Image
+      src={FRONT_TREES}
+      alt="The residence at 1133 Long Road framed by mature trees"
+      widths={[1000, 1500, 2000]}
+      sizes="100vw"
+      class="contact-bg"
+      loading="eager"
+    />
+    <div class="contact-veil" aria-hidden="true"></div>
+    <div class="contact-header-inner">
+      <p class="hero-eyebrow">By Appointment</p>
+      <h1 class="display-h1 contact-h1">Inquire</h1>
+      <div class="ornament ornament-light"><span class="ornament-glyph">·  ·  ·</span></div>
+      <p class="contact-sub">
+        We invite you to visit {property.shortName}.
+      </p>
+    </div>
+  </header>
+
+  <!-- ========== TWO COLUMN: FORM + INFO ========== -->
+  <section class="contact-main">
+    <div class="container contact-grid">
+      <!-- FORM -->
+      <div class="contact-form-col">
+        <p class="eyebrow">Request a Showing</p>
+        <h2 class="display-h2">Send a private inquiry.</h2>
+        <p class="contact-intro">
+          A member of our office will respond within one business day to confirm a time and to share
+          the full property book. All inquiries are held in confidence.
+        </p>
+
+        <form
+          class="inquiry-form"
+          name="inquiry"
+          method="POST"
+          action={`mailto:${agent.email}`}
+          enctype="text/plain"
+        >
+          <div class="field-row">
+            <label class="field">
+              <span class="field-label">First Name</span>
+              <input type="text" name="first_name" required autocomplete="given-name" />
+            </label>
+            <label class="field">
+              <span class="field-label">Last Name</span>
+              <input type="text" name="last_name" required autocomplete="family-name" />
+            </label>
+          </div>
+
+          <div class="field-row">
+            <label class="field">
+              <span class="field-label">Email</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+            <label class="field">
+              <span class="field-label">Telephone</span>
+              <input type="tel" name="phone" autocomplete="tel" />
+            </label>
+          </div>
+
+          <label class="field">
+            <span class="field-label">Preferred Date &amp; Time</span>
+            <input type="text" name="preferred_time" placeholder="e.g. Saturday afternoon, the 15th" />
+          </label>
+
+          <fieldset class="field field-group">
+            <legend class="field-label">I am interested in</legend>
+            <div class="checkbox-row">
+              <label><input type="checkbox" name="interest" value="private_showing" /> A private showing</label>
+              <label><input type="checkbox" name="interest" value="property_book" /> The full property book</label>
+              <label><input type="checkbox" name="interest" value="floor_plans" /> Floor plans</label>
+              <label><input type="checkbox" name="interest" value="history" /> The home's history</label>
+            </div>
+          </fieldset>
+
+          <label class="field">
+            <span class="field-label">A Note (optional)</span>
+            <textarea name="message" rows="5" placeholder="Anything you would like us to know."></textarea>
+          </label>
+
+          <p class="form-fine">
+            By submitting this form you agree to be contacted regarding {property.shortName}.
+          </p>
+
+          <button type="submit" class="btn">Send Inquiry</button>
+        </form>
+      </div>
+
+      <!-- INFO ASIDE -->
+      <aside class="contact-info-col">
+        <div class="info-card">
+          <p class="eyebrow">Presented By</p>
+          <h3 class="info-name">{agent.name}</h3>
+          <p class="info-title">{agent.title}</p>
+          <div class="info-rule" aria-hidden="true"></div>
+          <dl class="info-list">
+            <div>
+              <dt>Direct</dt>
+              <dd><a href={`tel:${agent.phone.replace(/[^0-9+]/g, '')}`}>{agent.phone}</a></dd>
+            </div>
+            <div>
+              <dt>Email</dt>
+              <dd><a href={`mailto:${agent.email}`}>{agent.email}</a></dd>
+            </div>
+            <div>
+              <dt>Hours</dt>
+              <dd>{agent.hours}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="info-card info-card-quiet">
+          <p class="eyebrow">The Address</p>
+          <h3 class="info-address">
+            {property.address}<br />
+            {property.city}, {property.state} {property.zip}
+          </h3>
+          <p class="info-fine">{property.neighborhood}</p>
+          <a
+            class="info-map-link"
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+              `${property.address}, ${property.city}, ${property.state} ${property.zip}`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open in Maps &nearr;
+          </a>
+        </div>
+
+        <figure class="info-photo">
+          <Image
+            src={ADDRESS_MARKER}
+            alt="The mailbox marked 1133 at the foot of the drive"
+            widths={[400, 700]}
+            sizes="(min-width: 900px) 380px, 100vw"
+            class="info-photo-img"
+          />
+          <figcaption>The mailbox at the foot of the drive.</figcaption>
+        </figure>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ========== CLOSING NOTE ========== -->
+  <section class="contact-close">
+    <div class="narrow contact-close-inner">
+      <div class="ornament"><span class="ornament-glyph">·  ·  ·</span></div>
+      <p class="lede">
+        “A house, like a person, has a history. We are honored to share this one with the right buyer.”
+      </p>
+      <p class="contact-close-sig">— {agent.name}</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ========== HEADER ========== */
+  .contact-header {
+    position: relative;
+    height: clamp(380px, 55vh, 520px);
+    overflow: hidden;
+    color: var(--ivory);
+  }
+  .contact-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 45%;
+  }
+  .contact-veil {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(20, 22, 28, 0.55), rgba(20, 22, 28, 0.7));
+  }
+  .contact-header-inner {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 0 1.5rem;
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.34em;
+    color: rgba(246, 241, 230, 0.88);
+    margin-bottom: 1.25rem;
+  }
+  .contact-h1 { color: var(--ivory); margin: 0; }
+  .ornament-light { color: var(--rule); }
+  .contact-sub {
+    font-family: var(--serif-body);
+    font-style: italic;
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    color: rgba(246, 241, 230, 0.92);
+    margin-top: 1rem;
+  }
+
+  /* ========== MAIN GRID ========== */
+  .contact-main {
+    padding: 6rem 0 4rem;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  }
+
+  .contact-intro {
+    color: var(--slate);
+    margin-bottom: 2rem;
+  }
+
+  /* ========== FORM ========== */
+  .inquiry-form { display: grid; gap: 1.5rem; }
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  @media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
+
+  .field { display: flex; flex-direction: column; gap: 0.5rem; }
+  .field-label {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--gold-deep);
+    padding: 0;
+  }
+  .field input, .field textarea {
+    font-family: var(--serif-body);
+    font-size: 1.05rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(26, 29, 36, 0.3);
+    padding: 0.6rem 0.25rem;
+    color: var(--ink);
+    transition: border-color 200ms ease;
+  }
+  .field input:focus, .field textarea:focus {
+    outline: none;
+    border-bottom-color: var(--gold);
+  }
+  .field textarea { resize: vertical; min-height: 110px; }
+
+  .field-group {
+    border: none; padding: 0; margin: 0;
+  }
+  .checkbox-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0.65rem 1.25rem;
+    margin-top: 0.4rem;
+  }
+  .checkbox-row label {
+    font-size: 1.02rem;
+    color: var(--ink-soft);
+    display: inline-flex; gap: 0.6rem; align-items: center;
+    cursor: pointer;
+  }
+  @media (max-width: 600px) { .checkbox-row { grid-template-columns: 1fr; } }
+
+  .form-fine {
+    font-size: 0.85rem;
+    color: var(--slate);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .inquiry-form .btn {
+    justify-self: flex-start;
+    margin-top: 0.5rem;
+  }
+
+  /* ========== INFO ASIDE ========== */
+  .contact-info-col {
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .info-card {
+    background: var(--ivory-soft);
+    border: 1px solid rgba(26, 29, 36, 0.1);
+    padding: 2.25rem;
+  }
+  .info-card-quiet { background: var(--paper); }
+  .info-card .eyebrow { margin-bottom: 0.85rem; }
+  .info-name {
+    font-family: var(--serif-display);
+    font-size: 1.55rem;
+    letter-spacing: 0.06em;
+    margin: 0 0 0.25rem;
+  }
+  .info-title {
+    color: var(--slate);
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+  .info-rule {
+    width: 40px; height: 1px; background: var(--gold); margin: 0 0 1.25rem;
+  }
+  .info-list { margin: 0; display: grid; gap: 0.75rem; }
+  .info-list > div { display: grid; grid-template-columns: 80px 1fr; align-items: baseline; }
+  .info-list dt {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--gold-deep);
+  }
+  .info-list dd { margin: 0; font-size: 1.05rem; }
+  .info-list a { border-bottom: 1px dotted rgba(26, 29, 36, 0.35); }
+
+  .info-address {
+    font-family: var(--serif-display);
+    font-size: 1.25rem;
+    letter-spacing: 0.06em;
+    line-height: 1.45;
+    margin: 0 0 0.5rem;
+  }
+  .info-fine { color: var(--slate); font-style: italic; margin: 0 0 1.25rem; }
+  .info-map-link {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--gold-deep);
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 0.2rem;
+  }
+
+  .info-photo { margin: 0; }
+  .info-photo-img { aspect-ratio: 4 / 3; object-fit: cover; box-shadow: 0 12px 28px rgba(20, 22, 28, 0.16); }
+  .info-photo figcaption {
+    margin-top: 0.75rem;
+    font-style: italic;
+    color: var(--slate);
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  /* ========== CLOSING ========== */
+  .contact-close {
+    text-align: center;
+    padding: 5rem 0 7rem;
+  }
+  .contact-close .lede {
+    font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+    color: var(--ink-soft);
+    margin: 1.5rem auto 1rem;
+    max-width: 700px;
+  }
+  .contact-close-sig {
+    font-family: var(--serif-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+</style>

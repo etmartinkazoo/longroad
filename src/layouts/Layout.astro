@@ -1,0 +1,325 @@
+---
+import { property, agent } from '../data/property';
+
+interface Props {
+  title?: string;
+  description?: string;
+  pageId?: 'home' | 'gallery' | 'contact';
+}
+
+const {
+  title = `${property.shortName} — ${property.city}, ${property.state}`,
+  description = `A historic ${property.style.toLowerCase()} for sale in the ${property.neighborhood} of ${property.city}, ${property.state}.`,
+  pageId,
+} = Astro.props;
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? pathname === '/' : pathname.startsWith(href);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body data-page={pageId}>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/">
+          <span class="brand-num">1133</span>
+          <span class="brand-rule" aria-hidden="true"></span>
+          <span class="brand-name">Long Road</span>
+        </a>
+        <nav class="primary-nav" aria-label="Primary">
+          <a href="/" class={isActive('/') ? 'is-active' : ''}>The Residence</a>
+          <a href="/gallery" class={isActive('/gallery') ? 'is-active' : ''}>Gallery</a>
+          <a href="/contact" class={isActive('/contact') ? 'is-active' : ''}>Inquire</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-col">
+          <p class="footer-mark">1133 · Long Road</p>
+          <p class="footer-fine">{property.city}, {property.state} {property.zip}</p>
+        </div>
+        <div class="footer-col footer-center">
+          <p class="footer-eyebrow">Presented By</p>
+          <p class="footer-name">{agent.name}</p>
+          <p class="footer-fine">{agent.title}</p>
+        </div>
+        <div class="footer-col footer-right">
+          <p class="footer-eyebrow">Inquiries</p>
+          <p class="footer-fine">
+            <a href={`tel:${agent.phone.replace(/[^0-9+]/g, '')}`}>{agent.phone}</a>
+          </p>
+          <p class="footer-fine">
+            <a href={`mailto:${agent.email}`}>{agent.email}</a>
+          </p>
+        </div>
+      </div>
+      <div class="footer-base">
+        <span>&copy; {new Date().getFullYear()} {property.shortName}</span>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <span>All photographs of the residence and grounds.</span>
+      </div>
+    </footer>
+
+    <style is:global>
+      :root {
+        --ivory: #f6f1e6;
+        --ivory-soft: #fbf7ef;
+        --paper: #efe7d6;
+        --ink: #1a1d24;
+        --ink-soft: #2a2e36;
+        --slate: #515561;
+        --rule: #c9b98b;
+        --gold: #9c7c34;
+        --gold-deep: #7d6224;
+        --forest: #2c3a2c;
+        --burgundy: #5a1f1f;
+        --serif-display: 'Cinzel', 'Trajan Pro', 'Times New Roman', serif;
+        --serif-body: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif;
+        --sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body { margin: 0; padding: 0; }
+
+      body {
+        background: var(--ivory);
+        color: var(--ink);
+        font-family: var(--serif-body);
+        font-size: 19px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      img, picture { display: block; max-width: 100%; height: auto; }
+
+      a { color: inherit; text-decoration: none; }
+      a:hover { color: var(--gold-deep); }
+
+      h1, h2, h3, h4 {
+        font-family: var(--serif-display);
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        margin: 0 0 0.5em;
+        color: var(--ink);
+      }
+
+      p { margin: 0 0 1em; }
+
+      .skip {
+        position: absolute; left: -9999px; top: 0;
+        background: var(--ink); color: var(--ivory); padding: 0.6rem 1rem;
+        font-family: var(--sans); font-size: 0.85rem; z-index: 1000;
+      }
+      .skip:focus { left: 1rem; top: 1rem; }
+
+      /* ========== HEADER ========== */
+      .site-header {
+        position: sticky; top: 0; z-index: 50;
+        background: rgba(246, 241, 230, 0.92);
+        backdrop-filter: saturate(140%) blur(8px);
+        -webkit-backdrop-filter: saturate(140%) blur(8px);
+        border-bottom: 1px solid rgba(26, 29, 36, 0.12);
+      }
+      .header-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 1.1rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+      .brand {
+        display: inline-flex; align-items: center; gap: 0.85rem;
+        font-family: var(--serif-display);
+        letter-spacing: 0.18em;
+      }
+      .brand-num {
+        font-size: 1.05rem; font-weight: 600; color: var(--ink);
+      }
+      .brand-rule {
+        display: inline-block; width: 36px; height: 1px;
+        background: var(--gold);
+      }
+      .brand-name {
+        font-size: 0.95rem; color: var(--ink-soft); text-transform: uppercase;
+      }
+      .primary-nav {
+        display: flex; gap: 2.25rem;
+        font-family: var(--sans);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--ink-soft);
+      }
+      .primary-nav a {
+        position: relative; padding: 0.4rem 0;
+        transition: color 200ms ease;
+      }
+      .primary-nav a::after {
+        content: ''; position: absolute; left: 50%; bottom: -2px;
+        width: 0; height: 1px; background: var(--gold);
+        transition: width 250ms ease, left 250ms ease;
+      }
+      .primary-nav a:hover, .primary-nav a.is-active {
+        color: var(--gold-deep);
+      }
+      .primary-nav a:hover::after, .primary-nav a.is-active::after {
+        width: 100%; left: 0;
+      }
+
+      /* ========== FOOTER ========== */
+      .site-footer {
+        margin-top: 6rem;
+        background: var(--ink);
+        color: var(--ivory);
+        padding: 4rem 2rem 2rem;
+      }
+      .footer-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 3rem;
+        text-align: left;
+      }
+      .footer-center { text-align: center; }
+      .footer-right { text-align: right; }
+      .footer-mark {
+        font-family: var(--serif-display);
+        font-size: 1.4rem; letter-spacing: 0.18em;
+        margin-bottom: 0.4rem; color: var(--ivory);
+      }
+      .footer-eyebrow {
+        font-family: var(--sans);
+        font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em;
+        color: var(--rule); margin-bottom: 0.5rem;
+      }
+      .footer-name {
+        font-family: var(--serif-display); font-size: 1.15rem;
+        letter-spacing: 0.1em; margin: 0 0 0.25rem;
+      }
+      .footer-fine {
+        font-size: 0.95rem; color: rgba(246, 241, 230, 0.78);
+        margin: 0 0 0.25rem;
+      }
+      .footer-fine a { color: rgba(246, 241, 230, 0.92); border-bottom: 1px dotted rgba(201, 185, 139, 0.5); }
+      .footer-fine a:hover { color: var(--rule); }
+      .footer-base {
+        max-width: 1100px; margin: 3rem auto 0;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(201, 185, 139, 0.18);
+        font-family: var(--sans); font-size: 0.72rem;
+        letter-spacing: 0.18em; text-transform: uppercase;
+        color: rgba(246, 241, 230, 0.55);
+        text-align: center;
+      }
+      .footer-sep { margin: 0 0.75rem; }
+
+      /* ========== Reusable bits ========== */
+      .container {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+      .narrow {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+      .eyebrow {
+        font-family: var(--sans);
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.32em;
+        color: var(--gold-deep);
+        display: inline-block;
+        margin-bottom: 1rem;
+      }
+      .ornament {
+        display: flex; align-items: center; justify-content: center;
+        gap: 0.85rem; margin: 1.25rem auto 0;
+        color: var(--gold);
+      }
+      .ornament::before, .ornament::after {
+        content: ''; width: 60px; height: 1px; background: currentColor;
+        opacity: 0.6;
+      }
+      .ornament-glyph { font-family: var(--serif-display); font-size: 1rem; letter-spacing: 0.5em; }
+
+      .display-h1 {
+        font-size: clamp(2.4rem, 6vw, 4.2rem);
+        line-height: 1.1; letter-spacing: 0.05em;
+      }
+      .display-h2 {
+        font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+        line-height: 1.2;
+      }
+      .lede {
+        font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+        font-style: italic; color: var(--ink-soft);
+      }
+
+      .btn {
+        display: inline-block;
+        font-family: var(--sans);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        padding: 1rem 2.25rem;
+        border: 1px solid var(--ink);
+        background: transparent;
+        color: var(--ink);
+        cursor: pointer;
+        transition: background 250ms ease, color 250ms ease, border-color 250ms ease;
+      }
+      .btn:hover { background: var(--ink); color: var(--ivory); }
+      .btn-light { border-color: var(--ivory); color: var(--ivory); }
+      .btn-light:hover { background: var(--ivory); color: var(--ink); }
+      .btn-gold { border-color: var(--gold); color: var(--gold-deep); }
+      .btn-gold:hover { background: var(--gold); color: var(--ivory); border-color: var(--gold); }
+
+      @media (max-width: 760px) {
+        .header-inner { padding: 0.85rem 1.25rem; gap: 1rem; }
+        .primary-nav { gap: 1.1rem; font-size: 0.7rem; letter-spacing: 0.18em; }
+        .brand-name { display: none; }
+        .footer-inner {
+          grid-template-columns: 1fr;
+          text-align: center;
+          gap: 2rem;
+        }
+        .footer-right, .footer-center { text-align: center; }
+      }
+    </style>
+  </body>
+</html>

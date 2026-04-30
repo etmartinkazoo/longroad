@@ -1,17 +1,477 @@
 ---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import { property } from '../data/property';
+import {
+  HERO,
+  HERO_ALT,
+  FRONT_SPRING,
+  FRONT_AUTUMN,
+  FRONT_TREES,
+  FOYER,
+  PORCH,
+  KITCHEN_ISLAND,
+  KITCHEN_RANGE,
+  DINING_MURAL,
+  LIVING_ROOM,
+  SITTING_ROOM,
+  STAIRCASE,
+  PATIO_UMBRELLA,
+  OUTDOOR_KITCHEN,
+  GARAGE,
+  REAR_HOUSE,
+} from '../data/images';
 
+const facts = [
+  { label: 'Bedrooms', value: String(property.beds) },
+  { label: 'Full Baths', value: String(property.baths) },
+  { label: 'Living', value: `${property.sqft} sq ft` },
+  { label: 'Grounds', value: `${property.acres} acres` },
+  { label: 'Style', value: property.style },
+  { label: 'Built', value: property.yearBuilt },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout pageId="home">
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <Image
+      src={HERO}
+      alt={HERO_ALT}
+      widths={[800, 1200, 1800, 2400]}
+      sizes="100vw"
+      loading="eager"
+      class="hero-img"
+    />
+    <div class="hero-veil" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Offered for the First Time in a Generation</p>
+      <h1 class="hero-title">
+        <span class="hero-line-1">Eleven Thirty-Three</span>
+        <span class="hero-flourish" aria-hidden="true">&#10086;</span>
+        <span class="hero-line-2">Long Road</span>
+      </h1>
+      <p class="hero-sub">
+        A landmark colonial in {property.city}'s {property.neighborhood}
+      </p>
+      <div class="hero-cta">
+        <a href="/gallery" class="btn btn-light">Tour the Residence</a>
+        <a href="/contact" class="btn btn-light btn-ghost">Request a Showing</a>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <span class="scroll-line"></span>
+    </div>
+  </section>
+
+  <!-- ========== INTRODUCTION ========== -->
+  <section class="intro">
+    <div class="narrow intro-inner">
+      <p class="eyebrow">An Introduction</p>
+      <h2 class="display-h2">A residence of quiet distinction, set among the great trees of Long Road.</h2>
+      <div class="ornament"><span class="ornament-glyph">·  ·  ·</span></div>
+      <p class="lede">
+        Behind a clipped boxwood hedge and a herringbone-brick walk, {property.shortName} has stood for nearly
+        a century as one of the most admired addresses in Kalamazoo. Its symmetrical white clapboard façade,
+        slate-grey roof and black louvered shutters have weathered every season with the same easy dignity —
+        a {property.style.toLowerCase()} of genuine pedigree, lovingly stewarded and ready for its next chapter.
+      </p>
+      <p>
+        Inside, the residence reveals room after room of considered detail: hand-painted scenic murals,
+        deep crown moldings, broad plank floors of dark oak, and a great central staircase that rises beneath
+        a Palladian fanlight. Outside, brick terraces give way to gardens of established hydrangea, hosta and fern,
+        framed by a wooded ravine that lends the property the feel of a private estate within town.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== AT-A-GLANCE FACTS ========== -->
+  <section class="facts">
+    <div class="container facts-inner">
+      {facts.map((f) => (
+        <div class="fact">
+          <p class="fact-label">{f.label}</p>
+          <p class="fact-value">{f.value}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ========== INTERIOR FEATURE ========== -->
+  <section class="feature">
+    <div class="feature-grid feature-grid-left">
+      <div class="feature-image-stack">
+        <Image
+          src={FOYER}
+          alt="Center-hall foyer with arched fanlight transom"
+          widths={[600, 900, 1400]}
+          sizes="(min-width: 900px) 50vw, 100vw"
+          class="feature-img"
+        />
+      </div>
+      <div class="feature-text">
+        <p class="eyebrow">The Interior</p>
+        <h2 class="display-h2">Architecture that rewards a closer look.</h2>
+        <p>
+          A center-hall plan opens to a graceful entry crowned by a leaded fanlight and flanked by twin
+          pilasters. To the right, a paneled library is wrapped in custom built-ins and warmed by a
+          wood-burning fireplace; to the left, the formal dining room is enveloped by a hand-painted
+          panoramic mural in the Zuber tradition.
+        </p>
+        <p>
+          The stair hall is the quiet centerpiece — a slow turn of risers and a tall arched window
+          that pours northern light onto wide oak treads.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-row feature-trio">
+      <Image src={LIVING_ROOM} alt="Library with fireplace and bookshelves" widths={[400, 700, 1000]} sizes="33vw" class="feature-img" />
+      <Image src={DINING_MURAL} alt="Formal dining room with hand-painted mural" widths={[400, 700, 1000]} sizes="33vw" class="feature-img" />
+      <Image src={STAIRCASE} alt="Center hall staircase" widths={[400, 700, 1000]} sizes="33vw" class="feature-img" />
+    </div>
+  </section>
+
+  <!-- ========== KITCHEN FEATURE ========== -->
+  <section class="feature feature-alt">
+    <div class="feature-grid feature-grid-right">
+      <div class="feature-text">
+        <p class="eyebrow">The Kitchen &amp; Gathering Rooms</p>
+        <h2 class="display-h2">A working kitchen, beautifully made.</h2>
+        <p>
+          The chef's kitchen is a study in restraint: hand-glazed subway tile, soapstone counters,
+          a six-burner professional range and a generous walnut-topped island that anchors the room.
+          Glass-fronted cabinetry frames a collection of historic china above the buffet.
+        </p>
+        <p>
+          A sun-filled sitting room opens through a pair of French doors directly onto the rear terrace —
+          a room as easy on a winter's morning as it is on a summer evening.
+        </p>
+      </div>
+      <div class="feature-image-stack">
+        <Image src={KITCHEN_ISLAND} alt="Custom kitchen with walnut island" widths={[600, 900, 1400]} sizes="(min-width: 900px) 50vw, 100vw" class="feature-img" />
+      </div>
+    </div>
+
+    <div class="feature-row feature-pair">
+      <Image src={KITCHEN_RANGE} alt="Professional range and farmhouse sink" widths={[600, 900, 1400]} sizes="50vw" class="feature-img" />
+      <Image src={SITTING_ROOM} alt="Sitting room with French doors" widths={[600, 900, 1400]} sizes="50vw" class="feature-img" />
+    </div>
+  </section>
+
+  <!-- ========== GARDENS / OUTDOOR ========== -->
+  <section class="feature feature-quiet">
+    <div class="feature-grid feature-grid-left">
+      <div class="feature-image-stack">
+        <Image src={PATIO_UMBRELLA} alt="Brick terrace beside the house" widths={[600, 900, 1400]} sizes="(min-width: 900px) 50vw, 100vw" class="feature-img" />
+      </div>
+      <div class="feature-text">
+        <p class="eyebrow">Gardens &amp; Grounds</p>
+        <h2 class="display-h2">A private estate within the city.</h2>
+        <p>
+          {property.acres} acres of established gardens unfold around the residence: a brick dining
+          terrace beneath a wide black-and-white-striped umbrella, a built-in stone outdoor
+          kitchen with a working grill and bar, and a herringbone walk that traces the perimeter
+          of the lawn.
+        </p>
+        <p>
+          A wooded ravine borders the rear of the property — mature beech, oak and dogwood that
+          turn brilliant in October and frame the home through every window of the upper floors.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-row feature-trio">
+      <Image src={OUTDOOR_KITCHEN} alt="Outdoor kitchen and bar" widths={[400, 700, 1000]} sizes="33vw" class="feature-img" />
+      <Image src={REAR_HOUSE} alt="Rear elevation seen from the wooded grounds" widths={[400, 700, 1000]} sizes="33vw" class="feature-img" />
+      <Image src={GARAGE} alt="Detached carriage-style garage" widths={[400, 700, 1000]} sizes="33vw" class="feature-img" />
+    </div>
+  </section>
+
+  <!-- ========== NEIGHBORHOOD ========== -->
+  <section class="neighborhood">
+    <div class="container neighborhood-inner">
+      <div class="neighborhood-image">
+        <Image src={FRONT_AUTUMN} alt="Lamppost and crimson maple in autumn" widths={[600, 900, 1400]} sizes="(min-width: 900px) 45vw, 100vw" class="feature-img" />
+      </div>
+      <div class="neighborhood-text">
+        <p class="eyebrow">The Long Road Neighborhood</p>
+        <h2 class="display-h2">An address that needs no introduction.</h2>
+        <p>
+          Long Road is one of the original streets of {property.city}'s historic west side — a quiet,
+          curving lane of stately colonials, Tudors and Georgians built between the wars, set on
+          deep, gardened lots beneath an unbroken canopy of mature oaks and maples.
+        </p>
+        <p>
+          The home is moments from Kalamazoo College, the Bronson Park district, and the cafés
+          and bookshops of downtown. Bronson Hospital and the medical campus are a short
+          drive; the lakes and orchards of Southwest Michigan begin just minutes beyond.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SEASONS PANEL ========== -->
+  <section class="seasons">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Through the Seasons</p>
+        <h2 class="display-h2">Beautiful in every weather.</h2>
+        <div class="ornament"><span class="ornament-glyph">·  ·  ·</span></div>
+      </div>
+      <div class="seasons-grid">
+        <figure>
+          <Image src={FRONT_SPRING} alt="Daffodils and spring greens at the entry" widths={[600, 900, 1200]} sizes="(min-width: 900px) 33vw, 100vw" class="feature-img" />
+          <figcaption>Spring</figcaption>
+        </figure>
+        <figure>
+          <Image src={PORCH} alt="The covered porch in summer" widths={[600, 900, 1200]} sizes="(min-width: 900px) 33vw, 100vw" class="feature-img" />
+          <figcaption>Summer</figcaption>
+        </figure>
+        <figure>
+          <Image src={FRONT_TREES} alt="The residence framed by full canopy" widths={[600, 900, 1200]} sizes="(min-width: 900px) 33vw, 100vw" class="feature-img" />
+          <figcaption>Autumn</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CALL TO ACTION ========== -->
+  <section class="cta">
+    <div class="narrow cta-inner">
+      <p class="eyebrow eyebrow-light">A Private Showing</p>
+      <h2 class="display-h2 cta-title">Tours of {property.shortName} are arranged by appointment.</h2>
+      <p class="lede cta-lede">
+        We would be delighted to walk the gardens with you and to share the full property book —
+        floor plans, recent improvements, and the home's history.
+      </p>
+      <a href="/contact" class="btn btn-gold">Request a Showing</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ========== HERO ========== */
+  .hero {
+    position: relative;
+    height: clamp(560px, 92vh, 880px);
+    width: 100%;
+    overflow: hidden;
+    color: var(--ivory);
+  }
+  .hero-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 38%;
+    filter: saturate(1.02) contrast(1.02);
+  }
+  .hero-veil {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(20, 22, 28, 0.5) 0%, rgba(20, 22, 28, 0.18) 35%, rgba(20, 22, 28, 0.7) 100%);
+  }
+  .hero-content {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.34em;
+    color: rgba(246, 241, 230, 0.88);
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-family: var(--serif-display);
+    font-weight: 500;
+    font-size: clamp(2.6rem, 7.5vw, 6rem);
+    line-height: 1;
+    letter-spacing: 0.06em;
+    margin: 0;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  }
+  .hero-flourish {
+    color: var(--rule); font-size: 0.5em; opacity: 0.85;
+    line-height: 1; margin: 0.1em 0;
+  }
+  .hero-sub {
+    font-family: var(--serif-body);
+    font-style: italic;
+    font-size: clamp(1.05rem, 1.8vw, 1.45rem);
+    margin: 1.5rem 0 0;
+    color: rgba(246, 241, 230, 0.94);
+    letter-spacing: 0.04em;
+  }
+  .hero-cta {
+    display: flex; flex-wrap: wrap; gap: 0.85rem;
+    justify-content: center; margin-top: 2.5rem;
+  }
+  .btn-ghost { background: rgba(0, 0, 0, 0.18); }
+  .hero-scroll {
+    position: absolute; bottom: 1.5rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+    font-family: var(--sans);
+    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.4em;
+    color: rgba(246, 241, 230, 0.75);
+  }
+  .scroll-line { width: 1px; height: 40px; background: rgba(246, 241, 230, 0.6); }
+
+  /* ========== INTRO ========== */
+  .intro { padding: 7rem 0 4rem; text-align: center; }
+  .intro-inner h2 { margin-bottom: 0.25em; }
+  .intro p { text-align: left; }
+  .intro p.lede { text-align: center; margin: 1.5rem 0 1.5rem; }
+
+  /* ========== FACTS ========== */
+  .facts {
+    background: var(--paper);
+    border-top: 1px solid rgba(26, 29, 36, 0.08);
+    border-bottom: 1px solid rgba(26, 29, 36, 0.08);
+    padding: 3rem 0;
+  }
+  .facts-inner {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+  .fact { padding: 0 0.5rem; }
+  .fact-label {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--gold-deep);
+    margin-bottom: 0.6rem;
+  }
+  .fact-value {
+    font-family: var(--serif-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    margin: 0;
+  }
+  @media (max-width: 900px) {
+    .facts-inner { grid-template-columns: repeat(3, 1fr); gap: 1.75rem 1rem; }
+  }
+  @media (max-width: 480px) {
+    .facts-inner { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ========== FEATURE BLOCKS ========== */
+  .feature { padding: 6rem 0; }
+  .feature-alt { background: var(--ivory-soft); }
+  .feature-quiet { background: var(--paper); }
+
+  .feature-grid {
+    max-width: 1280px;
+    margin: 0 auto 3rem;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .feature-grid-right { grid-template-columns: 1fr 1.1fr; }
+  .feature-grid-right .feature-text { order: 1; }
+  .feature-grid-right .feature-image-stack { order: 2; }
+
+  .feature-text { padding: 0 0.5rem; }
+  .feature-text h2 { margin-bottom: 1rem; }
+
+  .feature-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    box-shadow: 0 18px 50px rgba(20, 22, 28, 0.18);
+  }
+  .feature-image-stack .feature-img { aspect-ratio: 4 / 5; }
+
+  .feature-row {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    gap: 1.5rem;
+  }
+  .feature-trio { grid-template-columns: repeat(3, 1fr); }
+  .feature-pair { grid-template-columns: repeat(2, 1fr); }
+  .feature-row .feature-img {
+    aspect-ratio: 4 / 3;
+    box-shadow: 0 12px 30px rgba(20, 22, 28, 0.14);
+  }
+
+  @media (max-width: 900px) {
+    .feature-grid, .feature-grid-right {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .feature-grid-right .feature-text { order: 0; }
+    .feature-grid-right .feature-image-stack { order: 0; }
+    .feature-trio, .feature-pair { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .feature { padding: 4rem 0; }
+    .feature-trio, .feature-pair { grid-template-columns: 1fr; }
+  }
+
+  /* ========== NEIGHBORHOOD ========== */
+  .neighborhood { padding: 6rem 0 2rem; }
+  .neighborhood-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .neighborhood-image .feature-img { aspect-ratio: 4 / 5; }
+  @media (max-width: 900px) {
+    .neighborhood-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+
+  /* ========== SEASONS ========== */
+  .seasons { padding: 6rem 0; }
+  .section-head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 3rem;
+  }
+  .seasons-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .seasons-grid figure { margin: 0; text-align: center; }
+  .seasons-grid .feature-img {
+    aspect-ratio: 4 / 5;
+    box-shadow: 0 12px 30px rgba(20, 22, 28, 0.14);
+  }
+  .seasons-grid figcaption {
+    margin-top: 1rem;
+    font-family: var(--serif-display);
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  @media (max-width: 900px) {
+    .seasons-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ========== CTA ========== */
+  .cta {
+    background: var(--ink);
+    color: var(--ivory);
+    padding: 6rem 0;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  .eyebrow-light { color: var(--rule); }
+  .cta-title { color: var(--ivory); margin-bottom: 1rem; }
+  .cta-lede { color: rgba(246, 241, 230, 0.85); margin-bottom: 2.5rem; }
+</style>
