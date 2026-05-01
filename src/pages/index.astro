@@ -72,7 +72,7 @@ const facts = [
       <p class="lede">
         Behind a clipped boxwood hedge and a herringbone-brick walk, {property.shortName} has stood for nearly
         a century as one of the most admired addresses in Kalamazoo. Its symmetrical white clapboard façade,
-        slate-grey roof and black louvered shutters have weathered every season with the same easy dignity —
+        slate-grey roof and black louvered shutters have weathered every season with the same easy dignity,
         a {property.style.toLowerCase()} of genuine pedigree, lovingly stewarded and ready for its next chapter.
       </p>
       <p>
@@ -118,7 +118,7 @@ const facts = [
           panoramic mural in the Zuber tradition.
         </p>
         <p>
-          The stair hall is the quiet centerpiece — a slow turn of risers and a tall arched window
+          The stair hall is the quiet centerpiece, a slow turn of risers and a tall arched window
           that pours northern light onto wide oak treads.
         </p>
       </div>
@@ -143,7 +143,7 @@ const facts = [
           Glass-fronted cabinetry frames a collection of historic china above the buffet.
         </p>
         <p>
-          A sun-filled sitting room opens through a pair of French doors directly onto the rear terrace —
+          A sun-filled sitting room opens through a pair of French doors directly onto the rear terrace,
           a room as easy on a winter's morning as it is on a summer evening.
         </p>
       </div>
@@ -174,7 +174,7 @@ const facts = [
           of the lawn.
         </p>
         <p>
-          A wooded ravine borders the rear of the property — mature beech, oak and dogwood that
+          A wooded ravine borders the rear of the property: mature beech, oak and dogwood that
           turn brilliant in October and frame the home through every window of the upper floors.
         </p>
       </div>
@@ -197,7 +197,7 @@ const facts = [
         <p class="eyebrow">The Long Road Neighborhood</p>
         <h2 class="display-h2">An address that needs no introduction.</h2>
         <p>
-          Long Road is one of the original streets of {property.city}'s historic west side — a quiet,
+          Long Road is one of the original streets of {property.city}'s historic west side, a quiet,
           curving lane of stately colonials, Tudors and Georgians built between the wars, set on
           deep, gardened lots beneath an unbroken canopy of mature oaks and maples.
         </p>
@@ -241,7 +241,7 @@ const facts = [
       <p class="eyebrow eyebrow-light">A Private Showing</p>
       <h2 class="display-h2 cta-title">Tours of {property.shortName} are arranged by appointment.</h2>
       <p class="lede cta-lede">
-        We would be delighted to walk the gardens with you and to share the full property book —
+        We would be delighted to walk the gardens with you and to share the full property book:
         floor plans, recent improvements, and the home's history.
       </p>
       <a href="/contact" class="btn btn-gold">Request a Showing</a>
@@ -267,7 +267,8 @@ const facts = [
   .hero-veil {
     position: absolute; inset: 0;
     background:
-      linear-gradient(180deg, rgba(20, 22, 28, 0.5) 0%, rgba(20, 22, 28, 0.18) 35%, rgba(20, 22, 28, 0.7) 100%);
+      radial-gradient(ellipse at center, rgba(20, 22, 28, 0.45) 0%, rgba(20, 22, 28, 0) 65%),
+      linear-gradient(180deg, rgba(20, 22, 28, 0.55) 0%, rgba(20, 22, 28, 0.4) 50%, rgba(20, 22, 28, 0.78) 100%);
   }
   .hero-content {
     position: absolute; inset: 0;
@@ -281,8 +282,9 @@ const facts = [
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.34em;
-    color: rgba(246, 241, 230, 0.88);
+    color: var(--ivory);
     margin-bottom: 1.5rem;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
   }
   .hero-title {
     font-family: var(--serif-display);
@@ -291,7 +293,9 @@ const facts = [
     line-height: 1;
     letter-spacing: 0.06em;
     margin: 0;
-    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+    text-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.55),
+      0 4px 28px rgba(0, 0, 0, 0.5);
     display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
   }
   .hero-flourish {
@@ -303,8 +307,9 @@ const facts = [
     font-style: italic;
     font-size: clamp(1.05rem, 1.8vw, 1.45rem);
     margin: 1.5rem 0 0;
-    color: rgba(246, 241, 230, 0.94);
+    color: var(--ivory);
     letter-spacing: 0.04em;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
   }
   .hero-cta {
     display: flex; flex-wrap: wrap; gap: 0.85rem;

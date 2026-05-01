@@ -29,7 +29,7 @@ const totalCount = galleryImages.length;
 
 <Layout
   pageId="gallery"
-  title={`Gallery — ${property.shortName}`}
+  title={`Gallery · ${property.shortName}`}
   description={`A photographic tour of ${property.shortName}: ${totalCount} images of the residence, gardens and grounds.`}
 >
   <!-- ========== PAGE HEADER ========== -->
@@ -39,7 +39,7 @@ const totalCount = galleryImages.length;
       <h1 class="display-h1">The Gallery</h1>
       <div class="ornament"><span class="ornament-glyph">·  ·  ·</span></div>
       <p class="lede">
-        A photographic record of {property.shortName} — the architecture, the rooms, the gardens.
+        A photographic record of {property.shortName}: the architecture, the rooms, the gardens.
         Click any image to view it in detail.
       </p>
     </div>
@@ -143,6 +143,23 @@ const totalCount = galleryImages.length;
   }
   .gallery-jump a:first-child { border-left: none; }
   .gallery-jump a:hover { color: var(--gold-deep); background: rgba(156, 124, 52, 0.06); }
+
+  @media (max-width: 700px) {
+    .gallery-jump {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      max-width: 480px;
+      margin-inline: 1.25rem;
+    }
+    .gallery-jump a {
+      flex: 0 0 auto;
+      border-left: none;
+      border-top: 1px solid rgba(26, 29, 36, 0.12);
+      padding: 0.95rem 1rem;
+      letter-spacing: 0.22em;
+    }
+    .gallery-jump a:first-child { border-top: none; }
+  }
 
   .gallery-section {
     padding: 6rem 0;

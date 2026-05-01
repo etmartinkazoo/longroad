@@ -8,7 +8,7 @@ interface Props {
 }
 
 const {
-  title = `${property.shortName} — ${property.city}, ${property.state}`,
+  title = `${property.shortName} · ${property.city}, ${property.state}`,
   description = `A historic ${property.style.toLowerCase()} for sale in the ${property.neighborhood} of ${property.city}, ${property.state}.`,
   pageId,
 } = Astro.props;

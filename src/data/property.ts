@@ -7,7 +7,7 @@ export const property = {
   shortName: '1133 Long Road',
   tagline: 'A Storied Colonial in the Long Road Historic District',
   subtagline: 'Kalamazoo, Michigan',
-  // Editable specs — update with the listing sheet.
+  // Editable specs. Update with the listing sheet.
   beds: 5,
   baths: 4,
   halfBaths: 1,
