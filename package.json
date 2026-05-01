@@ -9,12 +9,20 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate-types": "wrangler types"
   },
   "dependencies": {
-    "astro": "^6.2.1"
+    "@astrojs/cloudflare": "^13.3.0",
+    "astro": "^6.2.1",
+    "node-addon-api": "^8.7.0",
+    "node-gyp": "^12.3.0",
+    "wrangler": "^4.87.0"
   },
   "optionalDependencies": {
     "sharp": "^0.33.5"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }
