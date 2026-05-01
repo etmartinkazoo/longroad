@@ -256,7 +256,7 @@ const facts = [
     height: clamp(560px, 92vh, 880px);
     width: 100%;
     overflow: hidden;
-    color: var(--ivory);
+    color: #fff;
   }
   .hero-img {
     position: absolute; inset: 0;
@@ -267,8 +267,8 @@ const facts = [
   .hero-veil {
     position: absolute; inset: 0;
     background:
-      radial-gradient(ellipse at center, rgba(20, 22, 28, 0.45) 0%, rgba(20, 22, 28, 0) 65%),
-      linear-gradient(180deg, rgba(20, 22, 28, 0.55) 0%, rgba(20, 22, 28, 0.4) 50%, rgba(20, 22, 28, 0.78) 100%);
+      radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.15) 70%),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.55) 50%, rgba(0, 0, 0, 0.88) 100%);
   }
   .hero-content {
     position: absolute; inset: 0;
@@ -282,9 +282,8 @@ const facts = [
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.34em;
-    color: var(--ivory);
+    color: #fff;
     margin-bottom: 1.5rem;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
   }
   .hero-title {
     font-family: var(--serif-display);
@@ -293,9 +292,7 @@ const facts = [
     line-height: 1;
     letter-spacing: 0.06em;
     margin: 0;
-    text-shadow:
-      0 2px 6px rgba(0, 0, 0, 0.55),
-      0 4px 28px rgba(0, 0, 0, 0.5);
+    color: #fff;
     display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
   }
   .hero-flourish {
@@ -307,9 +304,8 @@ const facts = [
     font-style: italic;
     font-size: clamp(1.05rem, 1.8vw, 1.45rem);
     margin: 1.5rem 0 0;
-    color: var(--ivory);
+    color: #fff;
     letter-spacing: 0.04em;
-    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
   }
   .hero-cta {
     display: flex; flex-wrap: wrap; gap: 0.85rem;
@@ -322,9 +318,9 @@ const facts = [
     display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
     font-family: var(--sans);
     font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.4em;
-    color: rgba(246, 241, 230, 0.75);
+    color: rgba(255, 255, 255, 0.85);
   }
-  .scroll-line { width: 1px; height: 40px; background: rgba(246, 241, 230, 0.6); }
+  .scroll-line { width: 1px; height: 40px; background: rgba(255, 255, 255, 0.7); }
 
   /* ========== INTRO ========== */
   .intro { padding: 7rem 0 4rem; text-align: center; }
